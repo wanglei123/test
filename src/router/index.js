@@ -23,9 +23,7 @@ let router = new Router({
   mode: 'history',
   linkActiveClass: 'is-active',  //全局设置--被选中的导航的class,默认是router-link-active
   scrollBehavior(to, from, savePosition) {  //切换导航或者浏览器前进，后退时触发  ,记录滚动位置，也可以定位hash
-    console.log(to);
-    console.log(from);
-    console.log(savePosition);  //滚动条的坐标，只有浏览器前进，后退时才有值
+   // console.log(savePosition);  //滚动条的坐标，只有浏览器前进，后退时才有值
 
     // if (savePosition) {
     //   return savePosition;
@@ -82,7 +80,7 @@ let router = new Router({
       }
     },
     {
-      path: '/user',
+      path: '/user/:tip?/:userId?',
       name:'user',
       component: user
     },
