@@ -22,8 +22,9 @@ let router = new Router({
   * */
   mode: 'history',
   linkActiveClass: 'is-active',  //全局设置--被选中的导航的class,默认是router-link-active
+
   scrollBehavior(to, from, savePosition) {  //切换导航或者浏览器前进，后退时触发  ,记录滚动位置，也可以定位hash
-   // console.log(savePosition);  //滚动条的坐标，只有浏览器前进，后退时才有值
+                                            // console.log(savePosition);  //滚动条的坐标，只有浏览器前进，后退时才有值
 
     // if (savePosition) {
     //   return savePosition;
@@ -31,8 +32,8 @@ let router = new Router({
     //   return {x: 0, y: 0}
     // }
 
-    if (to.hash){
-      return {selector:to.hash};
+    if (to.hash) {
+      return {selector: to.hash};
     }
 
   },
@@ -42,7 +43,10 @@ let router = new Router({
       path: '/',
       name: 'Home',
       component: home,
-      alias: '/index'   //当前路由的别名
+      alias: '/index',   //当前路由的别名
+      meta:{
+        index:0
+      }
     },
     {
       path: '/home',
@@ -57,7 +61,10 @@ let router = new Router({
         {
           path: '',  //置为空的话，默认子路由；打开之后，默认是被选中状态,不写"/",以"/"开头的都是对应的根路径
           name: 'study',
-          component: study
+          component: study,
+          meta:{
+            index:1
+          }
         },
         {
           path: '/work',  // /work 嵌套路径，显示时按根路径显示
@@ -77,12 +84,18 @@ let router = new Router({
       components: {
         default: document,
         silder: silder
+      },
+      meta:{
+        index:2
       }
     },
     {
       path: '/user/:tip?/:userId?',
-      name:'user',
-      component: user
+      name: 'user',
+      component: user,
+      meta:{
+        index:3
+      }
     },
     {
       path: '/render',
@@ -103,5 +116,5 @@ let router = new Router({
       }
     }
   ]
-})
+});
 export default router

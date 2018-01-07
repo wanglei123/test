@@ -1,7 +1,7 @@
 <template>
   <div>
     <my-input :is-show.sync="listShow" :value="inputValue"></my-input>
-    <list :data="datalist" @confirm="getData" v-show="listShow"></list>
+    <list :data="datalist"  @confirm="getData" v-show="listShow"></list>
   </div>
 </template>
 <style  scoped>
