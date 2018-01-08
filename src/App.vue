@@ -21,6 +21,12 @@
         <span>user</span>
       </router-link>
     </ul>
+
+    <input type="button" @click="backHandle" value="后退">
+    <input type="button" @click="forwardHandle" value="前进">
+    <input type="button" @click="goHandle" value="控制前进后退的步数">
+    <input type="button" @click="pushHandle" value="控制指定的导航push">
+    <input type="button" @click="replaceHandle" value="控制指定的导航replace">
     {{$route.meta.index}}
 
     <!--<router-view name="silder"></router-view>&lt;!&ndash;这里的class可以设置路由页面的共享样式&ndash;&gt;-->
@@ -41,6 +47,26 @@
       return {
         index: "/",
         names:'left'
+      }
+    },
+    // $router 实例方法中定义了一些路由方法,注意：不是$route，来实现导航的切换
+    methods:{
+      backHandle(){
+        this.$router.back();
+      },
+      forwardHandle(){
+        this.$router.forward();
+      },
+      goHandle(){
+        this.$router.go(-3);  //后退，不能超过历史记录中数
+        this.$router.go(3);   //前进
+        this.$router.go(0);   //当前页面
+      },
+      pushHandle(){  //push新添加记录，回退时会退到历史记录中的导航
+        this.$router.push('/document/#abc');
+      },
+      replaceHandle(){  //替换记录，回退时不会退到历史记录中的导航
+        this.$router.push('/document/#abc');
       }
     },
     watch:{

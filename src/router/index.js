@@ -63,7 +63,8 @@ let router = new Router({
           name: 'study',
           component: study,
           meta:{
-            index:1
+            index:1,
+            title:'about'
           }
         },
         {
@@ -85,8 +86,14 @@ let router = new Router({
         default: document,
         silder: silder
       },
+      //具休路由中的钩子函数
+      beforeEnter(to,from,next){
+        next();
+      },
       meta:{
-        index:2
+        index:2,
+        login:true,
+        title:'document'
       }
     },
     {
@@ -94,7 +101,8 @@ let router = new Router({
       name: 'user',
       component: user,
       meta:{
-        index:3
+        index:3,
+        title:'user'
       }
     },
     {
@@ -117,4 +125,26 @@ let router = new Router({
     }
   ]
 });
+
+//全局导航钩子函数,next判断是否登录
+// router.beforeEach((to,from,next) => {
+//   console.log('beforeEach');
+//   next(false);  //false:取消本次导航，
+//   //判断是否登录，去跳转导航
+//   if (to.meta.login){
+//     next('/login');
+//   }else{
+//     next();
+//   }
+// });
+
+//进入导航之后全局钩子函数，改变title
+// router.afterEach((to,from) => {
+//   if(to.meta.title){
+//     window.document.title = to.meta.title;
+//   } else {
+//     window.document.title = 'wangfight';
+//   }
+// });
+
 export default router
